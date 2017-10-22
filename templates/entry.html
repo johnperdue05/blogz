@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1 class="title">{{post.title}}</h1>
+<div><a href='./blog?user={{post.owner.id}}'>Written by {{post.owner.username}}</a></div>
 <div>{{post.pub_date}}</div>
 <p class="body">{{post.body}}</p>
 

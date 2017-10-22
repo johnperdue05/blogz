@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Build a Blog</h1>
+<h1>Blogz!</h1>
 <hr />
 
 {% if posts|length == 0 %}
@@ -10,6 +10,7 @@
 {% else %}
     {% for post in posts %}
         <a href="./blog?id={{post.id}}"><h2 class="title">{{post.title}}</h2></a>
+        <div><a href="./blog?user={{post.owner.id}}">Written by {{post.owner.username}}</a></div>
         <div>{{post.pub_date}}</div>
         <p class="body">{{post.body}}</p>
         <hr />
