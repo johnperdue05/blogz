@@ -97,18 +97,16 @@ def index():
 def blog():
     id = request.args.get('id')
     userId = request.args.get('user')
-    if not id:
-        if userId:
-            posts = Blog.query.filter_by(owner_id = userId).order_by(Blog.pub_date.desc()).all()
-        else:
-            posts = Blog.query.order_by(Blog.pub_date.desc()).all()
+    if not id and not userId:
+        posts = Blog.query.order_by(Blog.pub_date.desc()).all()
         return render_template('blog.html',title="Build a Blog", 
         posts=posts)
     if userId:
         posts = Blog.query.filter_by(owner_id=userId).order_by(Blog.pub_date.desc()).all()
         return render_template('blog.html', posts)
-    post = Blog.query.filter_by(id=id).first()
-    return render_template('entry.html', post=post)
+    if id:
+        post = Blog.query.filter_by(id=id).first()
+        return render_template('entry.html', post=post)
 
 
 @app.route('/newpost', methods=['GET', 'POST'])
